@@ -1,8 +1,12 @@
 # ViT-2SPN
 Vision Transformer-based Dual-Stream Self-Supervised Pretraining Networks for Retinal OCT Classification
 
-* PhD Student: Mohammadreza Saraei[^1] 
+* Mohammadreza Saraei [^1] 
 * Dr. Igor Kozak ([Website](https://doctors.bannerhealth.com/provider/igor-kozak/2955460?utm_source=gmb&utm_medium=listing&utm_campaign=doc_onlinescheduling&y_source=1_MTA1NzIwNTgzMy03MTUtbG9jYXRpb24ud2Vic2l0ZQ%3D%3D))
 * Dr. Eung-Joo Lee ([Website](https://www.brunel.ac.uk/people/sebelan-danishvar](https://ece.engineering.arizona.edu/faculty-staff/faculty/eung-joo-lee)))
 
 ![ViT-2SPN Architecture](https://github.com/mrsaraei/ViT-2SPN/blob/8d39c0b0b5fadbd23b42e55b2f2e31746eb9f709/Fig%201.jpg)
+
+<p align='justify'>Optical Coherence Tomography (OCT) is a non-invasive imaging modality essential for diagnosing various eye diseases. Despite its clinical significance, developing OCT-based diagnostic tools faces challenges, such as limited public datasets, sparse annotations, and privacy concerns. Although deep learning has made progress in automating OCT analysis, these challenges remain unresolved. To address these limitations, we introduce the Vision Transformer-based Dual-Stream Self-Supervised Pretraining Network (ViT-2SPN), a novel framework designed to enhance feature extraction and improve diagnostic accuracy. ViT-2SPN employs a three-stage workflow: Supervised Pretraining, Self-Supervised Pretraining (SSP), and Supervised Fine-Tuning. The pretraining phase leverages the OCTMNIST dataset (97,477 unlabeled images across four disease classes) with data augmentation to create dual-augmented views. A Vision Transformer (ViT-Base) backbone extracts features, while a negative cosine similarity loss aligns feature representations. Pretraining is conducted over 50 epochs with a learning rate of 0.0001 and momentum of 0.999. Fine-tuning is performed on a stratified 5.129\% subset of OCTMNIST using 10-fold cross-validation. ViT-2SPN achieves a mean AUC of 0.93, accuracy of 0.77, precision of 0.81, recall of 0.75, and an F1 score of 0.76, outperforming existing SSP-based methods. These results underscore the robustness and clinical potential of ViT-2SPN in retinal OCT classification.</p>
+
+[^1]: Please feel free to if you have any questions: mrsaraei@arizona.edu 
