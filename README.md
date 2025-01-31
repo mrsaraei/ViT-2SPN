@@ -13,7 +13,7 @@ Mohammadreza Saraei [^1], Dr. Igor Kozak ([Website](https://doctors.bannerhealth
 ![ViT-2SPN Architecture](https://github.com/mrsaraei/ViT-2SPN/blob/7f74e36f5e2fe3a57ed47c0647571e0067ab9c40/figures/Fig_2-1.svg)
 
 ## ViT-2SPN Architecture
-![ViT-2SPN Architecture](https://github.com/mrsaraei/ViT-2SPN/blob/7f74e36f5e2fe3a57ed47c0647571e0067ab9c40/figures/Fig_3-1.svg)
+![ViT-2SPN Architecture](https://github.com/mrsaraei/ViT-2SPN/blob/cd9882d20e9bb5da4d6076d288a845cd82c49e32/figures/Fig_3.svg)
 
 ## Experimental Setup
 During the SSP phase, the model utilizes the unlabeled OCTMNIST dataset, which comprises 97,477 training samples. The training process is conducted with a mini-batch size of 128, a learning rate of 0.0001, and a momentum rate of 0.999, spanning a total of 50 epochs. The ViT-base architecture, pretrained on the ImageNet dataset, is employed as the backbone. In the fine-tuning phase, the model leverages 5.129\% of the labeled OCTMNIST dataset, following a 10-fold cross-validation strategy. Each fold consists of 4,500 training samples and 500 validation samples, with an additional 500 samples reserved for testing. The fine-tuning process is carried out using a batch size of 16, the same learning rate from the pretraining phase, a dropout rate of 0.5, and 50 epochs
