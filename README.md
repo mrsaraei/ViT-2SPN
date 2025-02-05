@@ -33,7 +33,7 @@ During the SSP phase, the model utilizes the unlabeled OCTMNIST dataset, which c
 - **ssp_vit2spn.py:** Trains the self-supervised model using unlabeled images to extract meaningful features.  
 - **finetune_vit2spn.py:** Fine-tunes the pretrained model for classification tasks using labeled data.
 ## Usage
-To run any of the scripts, you can execute them as follows:
+Update the paths in the scripts to reflect your own, and to execute any of the scripts, you can run them as follows:
 
 ```bash
 python ssp_vit2spn.py
