@@ -30,16 +30,25 @@ During the SSP phase, the model utilizes the unlabeled OCTMNIST dataset, which c
 ![Performance Improvement](https://github.com/mrsaraei/ViT-2SPN/blob/2dd568836e7b9c49969ce03d7bef83bc20cb0e8b/figures/Fig_7.svg)
 
 ## Command
-**ssp_vit.py:** Trains the self-supervised model using unlabeled images to extract meaningful features.  
-**finetune_vit.py:** Fine-tunes the pretrained model for classification tasks using labeled data.
+- **ssp_vit2spn.py:** Trains the self-supervised model using unlabeled images to extract meaningful features.  
+- **finetune_vit2spn.py:** Fine-tunes the pretrained model for classification tasks using labeled data.
+## Usage
+To run any of the scripts, you can execute them as follows:
+
+```bash
+python ssp_vit2spn.py
+python finetune_vit2spn.py
+```
 
 ## Citation (BibTeX)
 
+```
 *@article{saraei2025vit,
   title={ViT-2SPN: Vision Transformer-based Dual-Stream Self-Supervised Pretraining Networks for Retinal OCT Classification},
   author={Saraei, Mohammadreza and Kozak, Igor and Lee, Eung-Joo},
   journal={arXiv preprint arXiv:2501.17260},
   year={2025}
 }*
+```
 
 [^1]: Please feel free to if you have any questions: mrsaraei@arizona.edu 
