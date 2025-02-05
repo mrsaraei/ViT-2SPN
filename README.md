@@ -20,7 +20,11 @@ During the SSP phase, the model utilizes the unlabeled OCTMNIST dataset, which c
 ![Experimental Setup](https://github.com/mrsaraei/ViT-2SPN/blob/071fe697c89e938d2c8f74d5dd2399893c5098ca/figures/Fig_11-1.svg)
 
 ## Result
-![AUC Curve](https://github.com/mrsaraei/ViT-2SPN/blob/dd8e708ce14316ae11113fe5657a37c633a48bca/figures/Fig_5-1.svg)
+<p align="center">
+  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/bbf5c596a8babe774bb6332bccf64d9011a79f00/figures/Fig_4.svg" alt="Performance Comparison" width="100%"/>
+  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/dd8e708ce14316ae11113fe5657a37c633a48bca/figures/Fig_5-1.svg" alt="AUC Curve" width="100%"/>
+  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/bbf5c596a8babe774bb6332bccf64d9011a79f00/figures/Fig_6.svg" alt="Confusion Matrix" width="100%"/>
+</p>
 
 ## Performance Improvement
 ![Performance Improvement](https://github.com/mrsaraei/ViT-2SPN/blob/2dd568836e7b9c49969ce03d7bef83bc20cb0e8b/figures/Fig_7.svg)
