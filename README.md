@@ -17,7 +17,7 @@ Mohammadreza Saraei [^1], Dr. Igor Kozak ([Website](https://doctors.bannerhealth
 
 ## Experimental Setup
 During the self-supervised pretraining phase, the model utilizes the unlabeled OCTMNIST dataset, which consists of 97k training samples. The training process is conducted with a mini-batch size of 128, a learning rate of 0.0001, and a momentum rate of 0.999, spanning a total of 50 epochs. For this phase, the model employs the ViT architecture, which has been pretrained on the ImageNet dataset. In the fine-tuning phase, the model takes advantage of 5k labeled samples from the OCTMNIST dataset, using a 10-fold cross-validation strategy. This method was chosen to promote a more stable and generalized learning process, maximizing the utility of the limited labeled data. Each fold consists of 4.5k training samples and 0.5k validation samples, with an additional 0.5k samples reserved for testing. The decision to reserve 0.5k samples for testing was made to ensure consistency across folds while keeping the test set independent. This setup allows for a robust yet computationally feasible assessment of the model's generalization performance. The fine-tuning process utilizes a batch size of 16, maintains the same learning rate from the pretraining phase, incorporates a dropout rate of 0.5, and also spans 50 epochs
-![Experimental Setup](https://github.com/mrsaraei/ViT-2SPN/blob/071fe697c89e938d2c8f74d5dd2399893c5098ca/figures/Fig_11-1.svg)
+![Experimental Setup](https://github.com/mrsaraei/ViT-2SPN/blob/4f4d4725f7e7c6a62bebd39932dbc73c1de8adb4/figures/Fig_4.svg)
 
 ## Result
 <p align="center">
