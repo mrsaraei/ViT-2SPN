@@ -21,10 +21,16 @@ During the self-supervised pretraining phase, the model utilizes the unlabeled O
 
 ## Result
 <p align="center">
-  <img src="" width="100%"/>
-  <img src="" width="100%"/>
-  <img src="" width="100%"/>
+  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/aff60c412627e0b71dde9c75dc1a807da78107bf/figures/Fig_5.svg" width="100%"/>
 </p>
+
+## Performance and Efficiency Assessment on Imbalanced OCTMNIST Dataset
+<p align="center">
+  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/6f3d1526fcdeade4abfe18a247115725e0180f7c/figures/Fig_6.svg" width="100%"/>
+</p>
+
+## Performance Assessment on Imbalanced OCT2017 Dataset
+![Performance Improvement]()
 
 ## Performance Assessment on Imbalanced OCT2017 Dataset
 ![Performance Improvement]()
