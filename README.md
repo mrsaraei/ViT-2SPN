@@ -21,24 +21,17 @@ During the self-supervised pretraining phase, the model utilizes the unlabeled O
 
 ## Result
 <p align="center">
-  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/bbf5c596a8babe774bb6332bccf64d9011a79f00/figures/Fig_4.svg" alt="Performance Comparison" width="100%"/>
-  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/dd8e708ce14316ae11113fe5657a37c633a48bca/figures/Fig_5-1.svg" alt="AUC Curve" width="100%"/>
-  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/bbf5c596a8babe774bb6332bccf64d9011a79f00/figures/Fig_6.svg" alt="Confusion Matrix" width="100%"/>
+  <img src="" width="100%"/>
+  <img src="" width="100%"/>
+  <img src="" width="100%"/>
 </p>
 
-## Performance Improvement
-![Performance Improvement](https://github.com/mrsaraei/ViT-2SPN/blob/2dd568836e7b9c49969ce03d7bef83bc20cb0e8b/figures/Fig_7.svg)
+## Performance Assessment on Imbalanced OCT2017 Dataset
+![Performance Improvement]()
 
 ## Command
 - **ssp_vit2spn.py:** Trains the self-supervised model using unlabeled images to extract meaningful features.  
 - **finetune_vit2spn.py:** Fine-tunes the pretrained model for classification tasks using labeled data.
-## Usage
-Update the paths in the scripts to reflect your own, and to execute any of the scripts, you can run them as follows:
-
-```bash
-python ssp_vit2spn.py
-python finetune_vit2spn.py
-```
 
 ## Citation (BibTeX)
 
