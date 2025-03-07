@@ -30,7 +30,7 @@ During the self-supervised pretraining phase, the model utilizes the unlabeled O
   <img src="https://github.com/mrsaraei/ViT-2SPN/blob/888605b17530a8ea677e622c0db5ebaed480256b/figures/Fig_7.svg" width="100%"/>
 </p>
 
-## erformance and Efficiency Assessment on Imbalanced OCT2017 Dataset
+## Performance and Efficiency Assessment on Imbalanced OCT2017 Dataset
 ![Performance Improvement](https://github.com/mrsaraei/ViT-2SPN/blob/3a74e581af88804c2c761ee94216173308dd823e/figures/Fig_8.svg)
 
 ## Command
