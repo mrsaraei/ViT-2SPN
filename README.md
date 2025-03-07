@@ -5,12 +5,12 @@ Mohammadreza Saraei [^1], Dr. Igor Kozak ([Website](https://doctors.bannerhealth
 
 **Code [[GitHub](https://github.com/mrsaraei/ViT-2SPN/tree/main)] | Data [[MedMNISTv2](https://github.com/MedMNIST/MedMNIST)] | Preprint [[ArXiv](https://doi.org/10.48550/arXiv.2501.17260)] | Publication [َUnder Review in MIDL 2025]**
 
-![SSP Approach](https://github.com/mrsaraei/ViT-2SPN/blob/536d76cd13d13e683cb47f23da126d67d88b7928/figures/Fig_1-1.svg)
+![SSP Approach](https://github.com/mrsaraei/ViT-2SPN/blob/536d76cd13d13e683cb47f23da126d67d88b7928/figures/Fig_1.svg)
 
 <p align='justify'>Optical Coherence Tomography (OCT) is a non-invasive imaging modality essential for diagnosing various eye diseases. Despite its clinical significance, the development of OCT-based diagnostic tools faces challenges such as limited public datasets, sparse annotations, and privacy concerns. Although deep learning has advanced OCT analysis, these challenges remain unresolved. To address these limitations, we introduce the Vision Transformer-based Dual-Stream Self-Supervised Pretraining Network (ViT-2SPN), a novel framework featuring a dual-stream network, feature concatenation, and a pretraining mechanism designed to enhance feature extraction and improve diagnostic accuracy. ViT-2SPN employs a three-stage workflow: Supervised Learning, Self-Supervised Pretraining, and Supervised Fine-Tuning. The pretraining phase leverages the unlabeled OCTMNIST dataset with data augmentation to create dual-augmented views, enabling effective feature learning through a ViT backbone and contrastive loss. Fine-tuning is then performed on a limited-annotated subset of OCTMNIST using cross-validation. ViT-2SPN-T achieves a mean AUC of 0.936, accuracy of 0.80, precision of 0.81, recall of 0.80, and an F1-Score of 0.79, outperforming baseline self-supervised learning-based methods. These results highlight the robustness and clinical potential of ViT-2SPN in retinal OCT classification.</p>
 
 ## Data Samples (Class: Normal, Drusen, DME, CNV)
-![ViT-2SPN Architecture](https://github.com/mrsaraei/ViT-2SPN/blob/7f74e36f5e2fe3a57ed47c0647571e0067ab9c40/figures/Fig_2-1.svg)
+![ViT-2SPN Architecture](https://github.com/mrsaraei/ViT-2SPN/blob/7f74e36f5e2fe3a57ed47c0647571e0067ab9c40/figures/Fig_2.svg)
 
 ## ViT-2SPN Architecture
 ![ViT-2SPN Architecture](https://github.com/mrsaraei/ViT-2SPN/blob/cd9882d20e9bb5da4d6076d288a845cd82c49e32/figures/Fig_3.svg)
