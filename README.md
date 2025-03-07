@@ -28,14 +28,10 @@ During the self-supervised pretraining phase, the model utilizes the unlabeled O
 <p align="center">
   <img src="https://github.com/mrsaraei/ViT-2SPN/blob/6f3d1526fcdeade4abfe18a247115725e0180f7c/figures/Fig_6.svg" width="100%"/>
   <img src="https://github.com/mrsaraei/ViT-2SPN/blob/888605b17530a8ea677e622c0db5ebaed480256b/figures/Fig_7.svg" width="100%"/>
-  <img src="" width="100%"/>
 </p>
 
-## Performance Assessment on Imbalanced OCT2017 Dataset
-![Performance Improvement]()
-
-## Performance Assessment on Imbalanced OCT2017 Dataset
-![Performance Improvement]()
+## erformance and Efficiency Assessment on Imbalanced OCT2017 Dataset
+![Performance Improvement](https://github.com/mrsaraei/ViT-2SPN/blob/3a74e581af88804c2c761ee94216173308dd823e/figures/Fig_8.svg)
 
 ## Command
 - **ssp_vit2spn.py:** Trains the self-supervised model using unlabeled images to extract meaningful features.  
