@@ -44,6 +44,9 @@ Mohammadreza Saraei [^1] ([Website](https://www.linkedin.com/in/mrsaraei/)), Dr.
 - ViT-2SPN Model > Baseline Self-Supervised Learning Models
 - <p align='justify'>The ViT-2SPN model demonstrated promising performance in classifying OCT images, achieving high specificity (over 90%) across all datasets. This emphasizes its capacity to accurately identify healthy individuals and reduce false positives, which is particularly beneficial for screening healthy patients and ensuring the correct identification of non-diseased cases. However, its sensitivity, especially on the OCTMNIST dataset, was relatively lower, suggesting that it was less effective at detecting diseased patients. In clinical settings, high sensitivity is essential to minimize false negatives and ensure that patients with conditions are not overlooked, which is critical for timely intervention and treatment.</p>
 
+## Presentation 
+[![Presentation Preview](https://github.com/mrsaraei/ViT-2SPN/blob/a8538c85887ad181197d7041b718402bcab31eb7/presentation/Fig_9.png)](https://github.com/mrsaraei/ViT-2SPN/blob/a8538c85887ad181197d7041b718402bcab31eb7/presentation/Presentation.pdf)
+
 ## Citation (BibTeX)
 
 ```
