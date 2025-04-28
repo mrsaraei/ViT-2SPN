@@ -3,7 +3,7 @@
 
 Mohammadreza Saraei [^1], Dr. Igor Kozak ([Website](https://doctors.bannerhealth.com/provider/igor-kozak/2955460?utm_source=gmb&utm_medium=listing&utm_campaign=doc_onlinescheduling&y_source=1_MTA1NzIwNTgzMy03MTUtbG9jYXRpb24ud2Vic2l0ZQ%3D%3D)), Dr. Eung-Joo Lee ([Website](https://www.brunel.ac.uk/people/sebelan-danishvar](https://ece.engineering.arizona.edu/faculty-staff/faculty/eung-joo-lee)))
 
-**Code [[GitHub](https://github.com/mrsaraei/ViT-2SPN/tree/main)] | Data [[MedMNISTv2 (2021)](https://github.com/MedMNIST/MedMNIST), [OCTID (2020)](https://borealisdata.ca/dataverse/OCTID), [UCSD-OCT (2018)](https://data.mendeley.com/datasets/rscbjbr9sj/3)] | Preprint [[ArXiv](https://doi.org/10.48550/arXiv.2501.17260)] | Publication [َUnder Review]**
+**Code [[GitHub](https://github.com/mrsaraei/ViT-2SPN/tree/main)] | Data [[MedMNISTv2 (2021)](https://github.com/MedMNIST/MedMNIST), [OCTID (2020)](https://borealisdata.ca/dataverse/OCTID), [UCSD-OCT (2018)](https://data.mendeley.com/datasets/rscbjbr9sj/3)] | Preprint [[ArXiv](https://doi.org/10.48550/arXiv.2501.17260)] | IEEE TBME Journal [َUnder Review]**
 
 ![SSP Approach](https://github.com/mrsaraei/ViT-2SPN/blob/4c5f159f72ea6734c440d6060c65685ede869233/figures/Fig_1.svg)
 
