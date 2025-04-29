@@ -10,7 +10,7 @@ Mohammadreza Saraei [^1] ([Website](https://www.linkedin.com/in/mrsaraei/)), Dr.
 <p align='justify'>Optical Coherence Tomography (OCT) is a key non-invasive tool for diagnosing retinal diseases. However, the development of OCT-based diagnostic models faces challenges such as limited datasets, sparse annotations, and privacy concerns, hindering further progress despite advances in deep learning. To address these challenges, we propose the Vision Transformer-based Dual-Stream Self-Supervised Pretraining Network (ViT-2SPN)—a novel framework designed to enhance feature extraction and improve diagnostic performance. ViT-2SPN features a dual-stream architecture with feature concatenation and incorporates a self-supervised pretraining strategy. The framework operates in three stages: (1) Supervised Learning, (2) Self-Supervised Pretraining, and (3) Run Fine-Tuning. During the pretraining phase, unlabeled OCT images from the OCTMNIST dataset are augmented to generate dual views, enabling effective representation learning via a ViT-Tiny backbone and contrastive loss. Fine-tuning is subsequently performed on annotated subsets of the OCTMNIST, UCSD OCT, and OCTID datasets using cross-validation. Experimental results show that ViT-2SPN outperforms existing self-supervised learning baselines, demonstrating its robustness and clinical potential in retinal OCT classification. The model excels in identifying healthy cases and ruling out disease, though its slightly lower sensitivity suggests room for improvement in detecting all disease instances.</p>
 
 ## Datasets
-![Sample Images](https://github.com/mrsaraei/ViT-2SPN/blob/801d963f9c28430f45a97978cf19eac90ac69812/figures/Fig_2.svg)
+![Sample Images](https://github.com/mrsaraei/ViT-2SPN/blob/401a5ca26e4f823ba45f4bd9c641420f9a4fe2fd/figures/Fig_2.png)
 ![Dataset Information](https://github.com/mrsaraei/ViT-2SPN/blob/3bb09ba05784bf58c39c9aaffe2c320b4dfae210/figures/Fig_2a.png)
 
 ## ViT-2SPN Architecture
@@ -45,7 +45,7 @@ Mohammadreza Saraei [^1] ([Website](https://www.linkedin.com/in/mrsaraei/)), Dr.
 > **Eventually:** <p align='justify'>The ViT-2SPN model demonstrated promising performance in classifying OCT images, achieving high specificity (over 90%) across all datasets. This emphasizes its capacity to accurately identify healthy individuals and reduce false positives, which is particularly beneficial for screening healthy patients and ensuring the correct identification of non-diseased cases. However, its sensitivity, especially on the OCTMNIST dataset, was relatively lower, suggesting that it was less effective at detecting diseased patients. In clinical settings, high sensitivity is essential to minimize false negatives and ensure that patients with conditions are not overlooked, which is critical for timely intervention and treatment.</p>
 
 ## Presentation (Please click the cover to view full slides.]
-[![Presentation Preview](https://github.com/mrsaraei/ViT-2SPN/blob/a8538c85887ad181197d7041b718402bcab31eb7/presentation/Fig_9.png)](https://github.com/mrsaraei/ViT-2SPN/blob/a8538c85887ad181197d7041b718402bcab31eb7/presentation/Presentation.pdf)
+[![Presentation Preview](https://github.com/mrsaraei/ViT-2SPN/blob/a8538c85887ad181197d7041b718402bcab31eb7/presentation/Fig_9.png)](https://github.com/mrsaraei/ViT-2SPN/blob/ccea7d3bd0112a87edfbd372365a39e4c7f3f7d0/presentation/Presentation.pdf)
 
 ## Citation (BibTeX)
 
