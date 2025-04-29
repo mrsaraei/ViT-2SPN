@@ -1,0 +1,265 @@
+import os
+import random
+import torch
+import torch.nn as nn
+import numpy as np
+import matplotlib.pyplot as plt
+from tqdm import tqdm
+from sklearn.metrics import roc_auc_score, roc_curve, auc, classification_report, confusion_matrix, ConfusionMatrixDisplay
+from sklearn.model_selection import StratifiedKFold, train_test_split
+from sklearn.utils.class_weight import compute_class_weight
+from torch.utils.data import DataLoader, Subset
+from torchvision import transforms, datasets
+from transformers import ViTModel
+from collections import Counter
+import warnings
+
+# Suppress warnings
+warnings.filterwarnings("ignore")
+
+# Configuration
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3,4,5"
+batch_size = 128
+fine_tune_epochs = 50
+k_folds = 10
+random_seed = 42
+subset_size = 2000
+
+# Data Augmentation
+strong_augment_transform = transforms.Compose([
+    transforms.Grayscale(num_output_channels=3),
+    transforms.RandomHorizontalFlip(p=0.5),
+    transforms.RandomVerticalFlip(p=0.3),
+    transforms.RandomRotation(degrees=30),
+    transforms.RandomAffine(degrees=15, translate=(0.1, 0.1), scale=(0.8, 1.2), shear=10),
+    transforms.ColorJitter(brightness=0.3, contrast=0.3, saturation=0.3, hue=0.1),
+    transforms.Resize((224, 224)),
+    transforms.ToTensor(),
+    transforms.GaussianBlur(kernel_size=3, sigma=(0.1, 2.0)),
+    transforms.RandomErasing(p=0.5, scale=(0.02, 0.2), ratio=(0.3, 3.3)),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+])
+
+# Load Dataset
+dataset_path = "./datasets/ucsdoct"
+full_dataset = datasets.ImageFolder(root=dataset_path, transform=strong_augment_transform)
+
+# Original class sizes
+class_counts = Counter(full_dataset.targets)
+print("Original Class sizes:", dict(class_counts))
+
+# Define number of classes
+num_classes = len(class_counts)
+print(f"Number of classes: {num_classes}")
+
+# Subset
+total_samples = len(full_dataset)
+subset_size = min(subset_size, total_samples)
+subset_indices = random.sample(range(total_samples), subset_size)
+subset_dataset = Subset(full_dataset, subset_indices)
+subset_labels = [full_dataset.targets[i] for i in subset_indices]
+
+# Data split (for test set only)
+train_idx, temp_idx, train_labels, temp_labels = train_test_split(
+    subset_indices, subset_labels, test_size=0.3, stratify=subset_labels, random_state=random_seed)
+val_idx, test_idx, _, _ = train_test_split(temp_idx, temp_labels, test_size=0.33, stratify=temp_labels, random_state=random_seed)
+
+train_dataset = Subset(full_dataset, train_idx)
+val_dataset = Subset(full_dataset, val_idx)
+test_dataset = Subset(full_dataset, test_idx)
+
+print(f"Subset dataset size: {len(subset_dataset)}")
+print(f"Train dataset size: {len(train_dataset)}")
+print(f"Validation dataset size: {len(val_dataset)}")
+print(f"Test dataset size: {len(test_dataset)}")
+
+# Dataloaders
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True)
+val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
+test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+
+# Class weights from full subset
+subset_targets = np.array([full_dataset.targets[i] for i in subset_dataset.indices])
+full_class_labels = np.unique(subset_targets)
+class_weights = compute_class_weight("balanced", classes=full_class_labels, y=subset_targets)
+weight_tensor = torch.tensor(class_weights, dtype=torch.float).to(device)
+print("Class weights:", class_weights)
+
+# Define Model
+class ViTBackbone(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.vit = ViTModel.from_pretrained("WinKawaks/vit-tiny-patch16-224", output_hidden_states=True)
+
+    def forward(self, x):
+        output = self.vit(x)
+        return output.hidden_states[-1].mean(dim=1)
+
+class FineTunedModel(nn.Module):
+    def __init__(self, num_classes):
+        super().__init__()
+        self.backbone = ViTBackbone()
+        self.fc = nn.Sequential(
+            nn.Linear(192, 128),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),
+            nn.Dropout(0.5),
+            nn.Linear(128, num_classes)
+        )
+
+    def forward(self, x):
+        features = self.backbone(x)
+        return self.fc(features)
+
+# Training Function
+def fine_tune_model(model, train_loader, val_loader, optimizer, criterion, scheduler, epochs=fine_tune_epochs, patience=3):
+    best_loss = float("inf")
+    best_weights = None
+    counter = 0
+
+    for epoch in range(epochs):
+        model.train()
+        train_loss = 0
+        for x, y in tqdm(train_loader, desc=f"Epoch {epoch+1}/{epochs}"):
+            x, y = x.to(device), y.squeeze().long().to(device)
+            optimizer.zero_grad()
+            loss = criterion(model(x), y)
+            loss.backward()
+            optimizer.step()
+            train_loss += loss.item()
+
+        val_loss = 0
+        model.eval()
+        with torch.no_grad():
+            for x, y in val_loader:
+                x, y = x.to(device), y.squeeze().long().to(device)
+                val_loss += criterion(model(x), y).item()
+
+        val_loss /= len(val_loader)
+        scheduler.step(val_loss)
+
+        print(f"Epoch {epoch+1}: Train Loss={train_loss/len(train_loader):.4f}, Val Loss={val_loss:.4f}")
+
+        if val_loss < best_loss:
+            best_loss = val_loss
+            best_weights = model.state_dict()
+            counter = 0
+        else:
+            counter += 1
+            if counter >= patience:
+                break
+
+    model.load_state_dict(best_weights)
+
+# AUC Computation and Curve Plotting
+def compute_auc_and_plot_fold(model, loader, classes, fold):
+    labels, probs = [], []
+    model.eval()
+    with torch.no_grad():
+        for x, y in loader:
+            x, y = x.to(device), y.squeeze().long().to(device)
+            outputs = model(x)
+            probs.extend(torch.softmax(outputs, dim=1).cpu().numpy())
+            labels.extend(y.cpu().numpy())
+
+    labels = np.array(labels)
+    probs = np.array(probs)
+    one_hot = np.eye(len(classes))[labels]
+
+    fpr, tpr, roc_auc = {}, {}, {}
+    for i in range(len(classes)):
+        fpr[i], tpr[i], _ = roc_curve(one_hot[:, i], probs[:, i])
+        roc_auc[i] = auc(fpr[i], tpr[i])
+
+    # Extract AUC values into a list and return
+    auc_values = list(roc_auc.values())  # Convert dict to list of AUC values
+    mean_auc = np.mean(auc_values)  # Calculate mean AUC
+    return fpr, tpr, roc_auc, mean_auc, labels, probs
+
+# Evaluation on Test Data
+def evaluate_test_data(model, loader, classes):
+    model.eval()
+    all_labels, all_probs = [], []
+
+    with torch.no_grad():
+        for x, y in loader:
+            x, y = x.to(device), y.squeeze().long().to(device)
+            outputs = model(x)
+            all_probs.append(torch.softmax(outputs, dim=1).cpu().numpy())
+            all_labels.append(y.cpu().numpy())
+
+    labels = np.concatenate(all_labels)
+    probs = np.concatenate(all_probs)
+    preds = np.argmax(probs, axis=1)
+
+    cm = confusion_matrix(labels, preds)
+    ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=classes).plot(cmap=plt.cm.Blues)
+    plt.title("Confusion Matrix")
+    plt.show()
+
+    print(classification_report(labels, preds, target_names=classes))
+
+    top1_accuracy = np.mean(preds == labels)
+
+    sensitivities = []
+    specificities = []
+    for i in range(len(classes)):
+        tp = cm[i, i]
+        fn = cm[i, :].sum() - tp
+        fp = cm[:, i].sum() - tp
+        tn = cm.sum() - (tp + fn + fp)
+
+        sensitivity = tp / (tp + fn) if (tp + fn) else 0
+        specificity = tn / (tn + fp) if (tn + fp) else 0
+
+        sensitivities.append(sensitivity)
+        specificities.append(specificity)
+
+    avg_confidence = np.mean(np.max(probs, axis=1))
+    return top1_accuracy, np.mean(sensitivities), np.mean(specificities), avg_confidence
+
+# Stratified K-Fold Cross-Validation with Best Model Selection
+skf = StratifiedKFold(n_splits=k_folds, shuffle=True, random_state=random_seed)
+
+confidence_scores = []
+aucs = []
+top1_accuracies = []
+sensitivities = []
+specificities = []
+
+for fold, (train_idx, val_idx) in enumerate(skf.split(range(len(subset_dataset)), 
+                                                       [full_dataset.targets[i] for i in subset_dataset.indices])):
+    print(f"\n--- Fold {fold+1}/{k_folds} ---")
+    train_ds = Subset(subset_dataset, train_idx)
+    val_ds = Subset(subset_dataset, val_idx)
+
+    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, drop_last=True)
+    val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False)
+
+    model = FineTunedModel(num_classes).to(device)
+    model.backbone.load_state_dict(torch.load("./ssp_retinaloct_tbme/vit2spn_tiny/octmnist_vit2spn_tiny_model.pth"))
+
+    optimizer = torch.optim.Adam(model.parameters(), lr=1e-4, weight_decay=1e-4)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, "min", factor=0.1, patience=3)
+
+    fine_tune_model(model, train_loader, val_loader, optimizer, nn.CrossEntropyLoss(weight=weight_tensor), scheduler)
+
+    # Compute AUC for this fold
+    _, _, _, fold_auc, _, _ = compute_auc_and_plot_fold(model, val_loader, [str(i) for i in range(num_classes)], fold)
+    aucs.append(fold_auc)
+
+    top1, sens, spec, conf = evaluate_test_data(model, test_loader, [str(i) for i in range(num_classes)])
+
+    confidence_scores.append(conf)
+    top1_accuracies.append(top1)
+    sensitivities.append(sens)
+    specificities.append(spec)
+
+# Print results
+print("\nOverall Results:")
+print(f"Mean Confidence: {np.mean(confidence_scores):.4f} ± {np.std(confidence_scores):.4f}")
+print(f"Mean AUC across folds: {np.mean(aucs):.4f} ± {np.std(aucs):.4f}")
+print(f"Mean Top-1 Accuracy: {np.mean(top1_accuracies):.4f} ± {np.std(top1_accuracies):.4f}")
+print(f"Mean Sensitivity: {np.mean(sensitivities):.4f} ± {np.std(sensitivities):.4f}")
+print(f"Mean Specificity: {np.mean(specificities):.4f} ± {np.std(specificities):.4f}")
