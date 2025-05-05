@@ -31,9 +31,10 @@ Mohammadreza Saraei [^1] ([Website](https://www.linkedin.com/in/mrsaraei/)), Dr.
 </p>
 
 <p align="center">
-  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/7b277ef704b97cda0bfd42a3bcf01db5f8899106/figures/Fig_6.png" width="100%"/>
-  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/6498d0935d9b728360cea2f85b474a0266a66971/figures/Fig_7.png" width="100%"/>
-  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/f80354f7ba0abb2054c4d79d8cfa860bf56dbe34/figures/Fig_8.png" width="100%"/>
+  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/8db26fc956168021d3f9eed8f202f97b51b9b2bc/figures/Fig_6.png" width="100%"/>
+  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/8db26fc956168021d3f9eed8f202f97b51b9b2bc/figures/Fig_7.png" width="100%"/>
+  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/8db26fc956168021d3f9eed8f202f97b51b9b2bc/figures/Fig_8.png" width="100%"/>
+  <img src="https://github.com/mrsaraei/ViT-2SPN/blob/8db26fc956168021d3f9eed8f202f97b51b9b2bc/figures/Fig_9.png" width="100%"/>
 </p>
 
 ## Conclusion
