@@ -168,10 +168,17 @@ def log_gpu_memory():
     reserved = torch.cuda.memory_reserved() / 1e9
     print(f"GPU Memory - Allocated: {allocated:.4f} GB, Reserved: {reserved:.4f} GB")
 
-# Compute FLOPs (GFLOPs) 
+# Compute FLOPs (GFLOPs) for the full forward pass
 dummy_input = torch.randn(1, 3, 224, 224).to(device)
-flops = FlopCountAnalysis(model.online_network, dummy_input)
-print(f"Model FLOPs: {flops.total() / 1e9:.4f} GFLOPs")
+flops = FlopCountAnalysis(model, (dummy_input, dummy_input))  # Pass both views
+print(f"Single-stream FLOPs: {flops.total() / 1e9:.4f} GFLOPs")
+
+# Alternative: Component-wise calculation
+flops_backbone = FlopCountAnalysis(model.online_network, dummy_input).total()
+flops_proj = FlopCountAnalysis(model.projection_head, torch.randn(1, 192).to(device)).total()
+flops_pred = FlopCountAnalysis(model.prediction_head, torch.randn(1, 128).to(device)).total()
+total_flops = flops_backbone + flops_proj + flops_pred
+print(f"Single-stream FLOPs (component-wise): {total_flops / 1e9:.4f} GFLOPs")
 
 # Training Function with Loss Logging
 def train_self_supervised(model, dataloader, epochs, optimizer, criterion, checkpoint_path="checkpoint.pth"):
