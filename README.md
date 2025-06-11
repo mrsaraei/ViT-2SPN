@@ -46,7 +46,7 @@ Mohammadreza Saraei [^1] ([Website](https://www.linkedin.com/in/mrsaraei/)), Dr.
 > **Eventually:** <p align='justify'>ViT-2SPN model consistently performed well across five retraining runs, achieving a high specificity of over 0.8965 with a standard deviation (SD) of 0.0051 across all imbalanced datasets. This underscores its effectiveness in accurately identifying healthy individuals and minimizing false positives, which is advantageous for screening and excluding non-diseased cases. However, its sensitivity, particularly on the OCTMNIST dataset, was relatively lower, suggesting reduced effectiveness in detecting diseased patients. In clinical contexts, high sensitivity is crucial to avoid false negatives and ensure timely diagnosis and treatment.</p>
 
 ## Presentation (Please click the cover to view full slides.]
-[![Presentation Preview](https://github.com/mrsaraei/ViT-2SPN/blob/a8538c85887ad181197d7041b718402bcab31eb7/presentation/Fig_9.png)](https://github.com/mrsaraei/ViT-2SPN/blob/5d47dedc1fe62e01480bb22806af96cff716757c/presentation/ViT-2SPN.pdf)
+[![Presentation Preview](https://github.com/mrsaraei/ViT-2SPN/blob/0e66f247a46d9e7cc35a399a0fc49477fbff021d/figures/Fig_10.png)](https://github.com/mrsaraei/ViT-2SPN/blob/5d47dedc1fe62e01480bb22806af96cff716757c/presentation/ViT-2SPN.pdf)
 
 ## Citation (BibTeX)
 
