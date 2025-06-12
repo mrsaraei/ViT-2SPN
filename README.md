@@ -48,15 +48,4 @@ Mohammadreza Saraei [^1] ([Website](https://www.linkedin.com/in/mrsaraei/)), Dr.
 ## Presentation (Please click the cover to view full slides.]
 [![Presentation Preview](https://github.com/mrsaraei/ViT-2SPN/blob/0e66f247a46d9e7cc35a399a0fc49477fbff021d/figures/Fig_10.png)](https://github.com/mrsaraei/ViT-2SPN/blob/5d47dedc1fe62e01480bb22806af96cff716757c/presentation/ViT-2SPN.pdf)
 
-## Citation (BibTeX)
-
-```
-*@article{saraei2025vit,
-  title={ViT-2SPN: Vision Transformer-based Dual-Stream Self-Supervised Pretraining Networks for Retinal OCT Classification},
-  author={Saraei, Mohammadreza and Kozak, Igor and Lee, Eung-Joo},
-  journal={arXiv preprint arXiv:2501.17260},
-  year={2025}
-}*
-```
-
 [^1]: Please feel free to if you have any questions: mrsaraei@arizona.edu 
